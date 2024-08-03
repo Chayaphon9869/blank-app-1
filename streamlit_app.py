@@ -1,12 +1,15 @@
 import streamlit as st
 import pandas as pd
 
-# Title of the app
 st.title('Data Display with Streamlit')
 
-# Load data
-file_path = 'E:\\Project\\automationpatch\\test.csv'  # Replace with your file path
-data = pd.read_csv(file_path)  # Use read_csv for CSV files
+# File uploader
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
-# Display the data
-st.write(data)
+if uploaded_file is not None:
+    # Load the uploaded file
+    try:
+        data = pd.read_csv(uploaded_file)
+        st.write(data)
+    except Exception as e:
+        st.error(f"Error: {e}")
